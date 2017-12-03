@@ -1,34 +1,42 @@
-//http://apprize.info/javascript/kids/7.html
-//What we need to do:
-//Pick a random word
-//Take the player's guess
-//Check that player's guess is valid
-//Keep track of letters that player has guessed
-//Show player progress, guesses left, etc
-//Finish when player has guessed word
-//Restart
 
-//Establish an array of words
+// Establish variables
+
+var wins = 0; 
+var winsPar = document.getElementById("wins");
+winsPar.innerHTML = "Wins: " + wins;
+
+// When player correctly guesses word, wins++
+
+
 var wordBank = ["galaxy", "alien", "pluto", "astronaut", "mercury", "star"];
-
-//Computer uses math floor and math random to choose from array
 var chosenWord = wordBank[Math.floor(Math.random() * wordBank.length)];
 
-var answerArray = [];
-for (var i = 0; i < chosenWord.length; i++) {
+var lettersGuessed = 0;
+
+// Show remaining guesses as numbers of letters in current word
+	var guessesLeft = chosenWord.length;
+	var remainingGuesses  = document.getElementById("remainingguesses");
+	remainingGuesses.innerHTML = "Number of Guesses Remaining: " + guessesLeft;
+	//var guessesPar = document.createElement("p");
+	//guessesPar.innerHTML = guessesLeft;
+	//remainingGuesses.appendChild(guessesPar);
+
+
+// Show appropriate number of dashes for current word
+	var currentWord = document.getElementById("currentword");
+	var answerArray = []
+	for (var i = 0; i < chosenWord.length; i++) {
 	answerArray[i] = "_";
-}
+	}
 
-var remainingGuesses = chosenWord.length;
-var lettersGuessed = event.key // ???
+	currentWord.innerHTML = "Current Word: " + answerArray.join(" ");
+	//var wordPar = document.createElement("p");
+	//wordPar.innerHTML = answerArray;
+	//currentWord.appendChild(wordPar);
 
-// Whenever a key is pressed, alert "pressed a button".
-document.onkeyup = function(event) {
-console.log(event);
+// Display letters guessed by user
+	
 
-var playerMove = event.key; //holds the key entered
 
-// if player choice is valid, update the blanks
-// otherwise, update letters already used & update remainingGuesses
 
 
