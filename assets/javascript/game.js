@@ -1,7 +1,8 @@
 // Run this function whenever user presses a key
-//document.onkeyup = function(event) {
-	// Determine which key was pressed
-	//var userGuess = event.key;
+document.onkeyup = function(event) {
+// Determine which key was pressed
+var userGuess = event.key;
+}
 	//while (guessesLeft > 0) {
 		//var i = 0;
 		//if userGuess===chosenArray[i] {
@@ -56,8 +57,9 @@ winsPar.innerHTML = "Wins: " + wins;
 	
 // Show letters that user has guessed
 
-var lettersGuessed = 0;
-
+var lettersGuessed = [];
+var letters = document.getElementById("lettersguessed");
+letters.innerHTML = "Letters Already Guessed: " + lettersGuessed;
 
 
 
