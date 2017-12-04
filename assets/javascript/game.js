@@ -3,7 +3,8 @@ document.onkeyup = function(event) {
 // Determine which key was pressed
 var userGuess = event.key;
 }
-	//while (guessesLeft > 0) {
+
+//while (guessesLeft > 0) {
 		//var i = 0;
 		//if userGuess===chosenArray[i] {
 			//guessesLeft--;
@@ -11,6 +12,11 @@ var userGuess = event.key;
 		//}
 	//}
 //}
+
+//The Game Loop
+while (remainingLetters > 0) {
+	var guess = prompt("Guess a letter, or click cancel to stop playing");
+	
 
 //if (userGuess===chosenArray[i]) 
 
@@ -60,6 +66,13 @@ winsPar.innerHTML = "Wins: " + wins;
 var lettersGuessed = [];
 var letters = document.getElementById("lettersguessed");
 letters.innerHTML = "Letters Already Guessed: " + lettersGuessed;
+
+// Ask why this isn't working
+window.addEventListener('keypress', function (event) {
+    if (event.keyCode !== 13) {
+        lettersGuessed.push(event.key);
+    }
+}, false);
 
 
 
