@@ -4,14 +4,28 @@ var chosenArray = chosenWord.split("");
 
 var guessesLeft = chosenWord.length;
 var remainingGuesses  = document.getElementById("remainingguesses");
-	remainingGuesses.innerHTML = "Number of Guesses Remaining: " + guessesLeft;
+	
+	function updateGuesses() {
+		remainingGuesses.innerHTML = "Number of Guesses Remaining: " + guessesLeft;
+	}
 
 
 var lettersGuessed = [];
 var letters = document.getElementById("lettersguessed");
-	letters.innerHTML = "Letters Already Guessed: " + lettersGuessed;
+	
+	function lettersGuess () {
+		letters.innerHTML = "Letters Already Guessed: " + lettersGuessed;
+	}
 
+	document.onkeypress = function(e) {
 
+      var userGuess = e.key;
+  	  //lettersGuessed.push(userGuess);
+  	}
+
+  	function userGuess () {
+  		lettersGuessed.push(userGuess);
+  	}
 
 var currentWord = document.getElementById("currentword");
 var answerArray = []
@@ -20,16 +34,29 @@ var answerArray = []
 	answerArray[i] = "_";
 	}
 
-	currentWord.innerHTML = "Current Word: " + answerArray.join(" ");
+	function currentWords () {
+		currentWord.innerHTML = "Current Word: " + answerArray.join(" ");
+	}
 
 var wins = 0; 
 var winsPar = document.getElementById("wins");
-winsPar.innerHTML = "Wins: " + wins;
+
+	function updateScore() {
+		winsPar.innerHTML = "Wins: " + wins;
+	}	
+
+// Create Game Loop Here
+
+// while (guessesLeft > 0) {
+	// take user input
+	// compare user guess to letters in array
+	// replace _ with letter if guessed correctly
+	// display updated array
+	// wins++ when user guesses entire word
+	// show new word
+//}
 
 
-//The Game Loop
-while (guessesLeft > 0) {
-}
 
 
 // Ask why this isn't working
@@ -38,6 +65,14 @@ while (guessesLeft > 0) {
         //lettersGuessed.push(event.key);
     //}
 //}, false);
+
+// Calling functions to start game
+updateGuesses();
+lettersGuess();
+currentWords();
+updateScore();
+userGuess();
+
 
 
 
