@@ -3,9 +3,9 @@ var word = ["galaxy", "alien", "pluto", "astronaut", "mercury", "star", "retrogr
 var chosenWord = ""; // word computer randomly selects
 var letters= []; // letters that comprise chosenWord
 var blanks = []; // underscores of current word
-var wrongLetters = []; 
+var wrongLetters = []; //incorrectly guessed letters
 var number = 0; // length of chosenWord
-var guessesLeft = 10;
+var guessesLeft = 10; // how many "lives" player has left. starts at 10.
 var losses = 0; // players losses
 var wins= 0; // players wins
 
@@ -33,12 +33,18 @@ function gameStart() {
 function checkAnswer (letter) {
 
   var letterInWord = false;
-
+  var repeatedLetter = false;
   for(var j = 0; j < number; j++) {
 
     if (letter == chosenWord[j]) {
       letterInWord = true;
     }
+  }
+
+  for(var l = 0; l < wrongLetters.length; l++) {
+  	if (letter == wrongLetters[l]) {
+  		repeatedLetter = true
+  	}
   }
  
   if (letterInWord) {
@@ -47,9 +53,11 @@ function checkAnswer (letter) {
         blanks[k] = letter;
       }         
     }
+  } else if (repeatedLetter) {
+  	// is this allowed?
   } else {
-      wrongLetters.push(letter);
-      guessesLeft--;
+  	  wrongLetters.push(letter);
+  	  guessesLeft--;
   }
   
 };
