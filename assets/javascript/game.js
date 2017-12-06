@@ -1,83 +1,83 @@
-var wordBank = ["galaxy", "alien", "pluto", "astronaut", "mercury", "star"];
-var chosenWord = wordBank[Math.floor(Math.random() * wordBank.length)];
-var chosenArray = chosenWord.split("");
+// define variables
+var word = ["galaxy", "alien", "pluto", "astronaut", "mercury", "star", "retrograde", "rover"]; 
+var chosenWord = ""; // word computer randomly selects
+var letters= []; // letters that comprise chosenWord
+var blanks = []; // underscores of current word
+var wrongLetters = []; 
+var number = 0; // length of chosenWord
+var guessesLeft = 10;
+var losses = 0; // players losses
+var wins= 0; // players wins
 
-var guessesLeft = chosenWord.length;
-var lettersGuessed = [];
-var answerArray = []
-var remainingGuesses  = document.getElementById("remainingguesses");
-var letters = document.getElementById("lettersguessed");
-var currentWord = document.getElementById("currentword");
-var wins = 0; 
-var winsPar = document.getElementById("wins");
+// start the game
+function gameStart() {
+	chosenWord = word[Math.floor(Math.random() * word.length)];
+    letters = chosenWord.split("");
+    number = letters.length;
 
-// create dashes for the chosen word
-for (var i = 0; i < chosenWord.length; i++) {
-	answerArray[i] = "_";
-}
+    guessesLeft = 10;
+    wrongLetters = [];
+    blanks = [];
 
-// starts the game play
-// calls a bunch of functions
-startGame();
+    for(var i = 0; i < number; i++) {
+      blanks.push("_");
+    }
+           
+    document.getElementById("currentword").innerHTML = "Current Word: " + blanks.join(" ");
+    document.getElementById("wins").innerHTML = "Wins: " + wins;
+    document.getElementById("losses").innerHTML = "Losses: " + losses;
+    document.getElementById("guessesLeft").innerHTML = "Guesses Left: " +guessesLeft;
+    document.getElementById("lettersGuessed").innerHTML = "Letters Guessed: " + wrongLetters;
+  };
+    
+function checkAnswer (letter) {
 
-function updateGuesses() {
-	remainingGuesses.innerHTML = "Number of Guesses Remaining: " + guessesLeft;
-}
-	
-function lettersGuess () {
-	letters.innerHTML = "Letters Already Guessed: " + lettersGuessed.join(" ");
-}
+  var letterInWord = false;
 
-document.onkeypress = function(e) {
-  	updateUserGuess(e.key);
-}
+  for(var j = 0; j < number; j++) {
 
-function updateUserGuess (userGuess) {
-	// if statement to block multiple
-	// of the same letter
-	lettersGuessed.push(userGuess);
-	lettersGuess();
-}
+    if (letter == chosenWord[j]) {
+      letterInWord = true;
+    }
+  }
+ 
+  if (letterInWord) {
+    for(var k = 0; k < number; k++) {
+      if (chosenWord[k] == letter) {
+        blanks[k] = letter;
+      }         
+    }
+  } else {
+      wrongLetters.push(letter);
+      guessesLeft--;
+  }
+  
+};
 
-function currentWords () {
-	currentWord.innerHTML = "Current Word: " + answerArray.join(" ");
-}
+gameStart();
 
-function updateScore() {
-	winsPar.innerHTML = "Wins: " + wins;
-}	
+function rounds() {
 
-// Create Game Loop Here
+  document.getElementById("guessesLeft").innerHTML = "Guesses Left: " +guessesLeft;
+  document.getElementById("lettersGuessed").innerHTML = "Incorrect Letters Guessed: " + wrongLetters;
+  document.getElementById("currentword").innerHTML = "Current Word: " + blanks.join(" ");
+   
+  if(letters.toString() == blanks.toString()) {
+    wins++;
+    document.getElementById("wins").innerHTML = "Wins: " + wins;
+    gameStart();
+  } else if (guessesLeft===0) {
+      losses++;
+      document.getElementById("losses").innerHTML = "Losses: " + losses;
+      gameStart();
+  }
+};
 
-// while (guessesLeft > 0) {
-	// take user input
-	// compare user guess to letters in array
-	// replace _ with letter if guessed correctly
-	// display updated array
-	// guessesLeft--
-	// wins++ when user guesses entire word
-	// show new word
-//}
-
-
-
-
-// Ask why this isn't working
-//window.addEventListener('keypress', function (event) {
-    //if (event.keyCode !== 13) {
-        //lettersGuessed.push(event.key);
-    //}
-//}, false);
-
-// Calling functions to start game
-function startGame() {
-	updateGuesses();
-	lettersGuess();
-	currentWords();
-	updateScore();
-	updateUserGuess();
-}
-
-
-
+//event listener
+document.onkeypress = function(event) {
+  var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+  console.log(userGuess);
+  checkAnswer(userGuess);
+  rounds();
+};
 
