@@ -73,8 +73,8 @@ function rounds() {
   if(letters.toString() == blanks.toString()) {
     wins++;
     document.getElementById("wins").innerHTML = "Wins: " + wins;
-    // setTimeout(gameStart(), 50000); tried to dely gameStart, but couldn't get it to work
-    gameStart();
+    setTimeout(gameStart, 1500); // delay gameStart so word displays!
+    //gameStart();
   } else if (guessesLeft===0) {
       losses++;
       document.getElementById("losses").innerHTML = "Losses: " + losses;
