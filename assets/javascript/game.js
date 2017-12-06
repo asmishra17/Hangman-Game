@@ -11,7 +11,7 @@ var wins= 0; // players wins
 
 // start the game
 function gameStart() {
-	chosenWord = word[Math.floor(Math.random() * word.length)];
+  chosenWord = word[Math.floor(Math.random() * word.length)];
     letters = chosenWord.split("");
     number = letters.length;
 
@@ -27,7 +27,7 @@ function gameStart() {
     document.getElementById("wins").innerHTML = "Wins: " + wins;
     document.getElementById("losses").innerHTML = "Losses: " + losses;
     document.getElementById("guessesLeft").innerHTML = "Guesses Left: " +guessesLeft;
-    document.getElementById("lettersGuessed").innerHTML = "Letters Guessed: " + wrongLetters;
+    document.getElementById("lettersGuessed").innerHTML = "Incorrect Letters Guessed: " + wrongLetters;
   };
     
 function checkAnswer (letter) {
@@ -76,8 +76,6 @@ function rounds() {
 //event listener
 document.onkeypress = function(event) {
   var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-  console.log(userGuess);
   checkAnswer(userGuess);
   rounds();
 };
-
